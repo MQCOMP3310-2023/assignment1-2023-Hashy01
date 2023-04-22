@@ -32,7 +32,9 @@ public class App extends JFrame {
         }
 
         @Override
-        public void keyPressed (KeyEvent e) {}    
+        public void keyPressed (KeyEvent e) {
+            // This method is empty.
+        }    
         
         @Override
         public void keyReleased (KeyEvent e) {

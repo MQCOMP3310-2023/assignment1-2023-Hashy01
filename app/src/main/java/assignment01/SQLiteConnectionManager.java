@@ -15,15 +15,15 @@ public class SQLiteConnectionManager {
     
     private String wordleDropTableString = "DROP TABLE IF EXISTS wordlist;";
     private String wordleCreateString = 
-          "CREATE TABLE wordlist (\n" 
-        + "	id integer PRIMARY KEY,\n"
-        + "	word text NOT NULL\n"
+          "CREATE TABLE wordlist (\\n" 
+        + " id integer PRIMARY KEY,\\n"
+        + " word text NOT NULL\\n"
         + ");";
     
     private String validWordsDropTableString = "DROP TABLE IF EXISTS validWords;";
     private String validWordsCreateString = 
           "CREATE TABLE validWords (\n" 
-        + "	id integer PRIMARY KEY,\n"
+        + " id integer PRIMARY KEY,\n"
         + "	word text NOT NULL\n"
         + ");";
 
@@ -67,7 +67,7 @@ public class SQLiteConnectionManager {
      * @return true if the file exists in the correct location, false otherwise. If no url defined, also false.
      */
     public boolean checkIfConnectionDefined(){
-        if(databaseURL.equals("")){
+        if("".equals(databaseURL)){
             return false;
         }else{
             try (Connection conn = DriverManager.getConnection(databaseURL)) {
@@ -159,12 +159,14 @@ public class SQLiteConnectionManager {
      */
     public boolean isValidWord(String guess)
     {
-        String sql = "SELECT count(id) as total FROM validWords WHERE word like'"+guess+"';";
+        String sql = "SELECT count(id) as total FROM validWords WHERE word like ?";
         
         try (   Connection conn = DriverManager.getConnection(databaseURL);
                     PreparedStatement stmt = conn.prepareStatement(sql)
                 ) 
+                
             {
+                stmt.setString(1, guess);
                 if (conn != null) {
                     ResultSet resultRows  = stmt.executeQuery();
                     while (resultRows.next())
