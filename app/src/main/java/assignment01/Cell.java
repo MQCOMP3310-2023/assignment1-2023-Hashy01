@@ -6,7 +6,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
-public class Cell extends Rectangle{
+public class Cell extends Rectangle implements Cloneable{
     private static int size = 70;
     protected int col;
     protected int row;
@@ -130,24 +130,16 @@ public class Cell extends Rectangle{
         return Integer.toString(col) + Integer.toString(row) + ":'" + displayCharacter + "'";
     }
 
-    public Cell clone() {
-        try {
-            return (Cell) super.clone();
-        } catch (CloneNotSupportedException e) {
-            throw new AssertionError("Should not happen");
-        }
+    //Copy Constructor to solve clone method error
+    public Cell(Cell copy) {
+        super(copy.x, copy.y, copy.width, copy.height);
+        this.col = copy.col;
+        this.row = copy.row;
+        this.backbgroundColor = copy.backbgroundColor;
+        this.textColor = copy.textColor;
+        this.displayCharacter = copy.displayCharacter;
+        this.isEmpty = copy.isEmpty;
+        this.isActive = copy.isActive;
     }
-
-    // Copy Constructor to solve clone method error
-    // public Cell(Cell copy) {
-    //     super(copy.x, copy.y, copy.width, copy.height);
-    //     this.col = copy.col;
-    //     this.row = copy.row;
-    //     this.backbgroundColor = copy.backbgroundColor;
-    //     this.textColor = copy.textColor;
-    //     this.displayCharacter = copy.displayCharacter;
-    //     this.isEmpty = copy.isEmpty;
-    //     this.isActive = copy.isActive;
-    // }
     
 }
