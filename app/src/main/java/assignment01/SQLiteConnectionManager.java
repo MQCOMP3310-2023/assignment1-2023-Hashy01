@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Arrays;
+
 
 public class SQLiteConnectionManager {
 
@@ -187,7 +189,7 @@ public class SQLiteConnectionManager {
                 return false;
 
             } catch (SQLException e) {
-                System.out.println(e.getStackTrace());
+                System.out.println(Arrays.toString(e.getStackTrace()));
                 return false;
             }
 
