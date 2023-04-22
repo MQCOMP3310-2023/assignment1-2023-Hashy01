@@ -88,7 +88,7 @@ public class SQLiteConnectionManager {
      * @return true if the table structures have been created.
      */
     public boolean createWordleTables(){
-        if(databaseURL != ""){
+        if (!databaseURL.equals("")) {
             try (   Connection conn = DriverManager.getConnection(databaseURL);
                     Statement stmt = conn.createStatement()
                 ) 
